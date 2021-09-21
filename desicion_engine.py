@@ -1,12 +1,20 @@
 
 import json
-#import ComandsQ
+import time
 #Configuracion de redis
 from redis import Redis
 redis_connection = Redis(host="localhost",port=6379,db=0)	
 
 
 def filter_command(request_redis):
+	"""Se realiza el filtrado de los comandos recibidos en redis commads
+
+	Args:
+		request_redis ([str]): [Consulta a redis]
+
+	Returns:
+		[str]: [el comando selecionado por el usuario]
+	"""
 	try:
 		dict_request = json.loads(request_redis)
 		return dict_request['payload']
@@ -15,6 +23,11 @@ def filter_command(request_redis):
 		print(f"Fail Filter Command {ex_filter_command}")
 
 def status_oximeter():
+	"""Realiza la conecion con la informacion del oximetro, obtenida desde redis
+
+	Returns:
+		[Str]: [Oxigenacion obtenida por el usuario]
+	"""
 	get_status_oximeter = redis_connection.get('status_oximeter').decode(encoding='utf-8')
 	return get_status_oximeter
 
@@ -38,6 +51,7 @@ while True:
 			print("Ejercutar oximetro")
 			status = status_oximeter()
 			print(status)
+			time.sleep(1)
 		else:
 			print("Ejecutar otro")
 		#print(f"Data: {request_redis}")
