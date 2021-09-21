@@ -51,7 +51,7 @@ while True:
 			print("Ejercutar oximetro")
 			status = status_oximeter()
 			print(status)
-			time.sleep(1)
+			#time.sleep(1)
 		else:
 			print("Ejecutar otro")
 		#print(f"Data: {request_redis}")
