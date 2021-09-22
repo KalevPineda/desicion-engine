@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#personal
+redis_proof.py
+Sistema2.py
